@@ -14,6 +14,7 @@ type Config struct {
 
 // CreateConfig creates the default plugin configuration.
 func CreateConfig() *Config {
+	fmt.Println("CreateConfig()")
 	return &Config {
 		Headers: make(map[string]string),
 	}
@@ -21,6 +22,7 @@ func CreateConfig() *Config {
 
 // New created a new plugin.
 func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
+	fmt.Println("New()")
 	_, ok := config.Headers["sslClientCert"]
 	if (!ok) {
 		return nil, fmt.Errorf("configuration option 'sslClientCert' not set")
@@ -45,7 +47,6 @@ type mTlsForwarder struct {
 }
 
 func (m mTlsForwarder) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
-
 
 	// are we using mTLS?
 	if request.TLS != nil && len(request.TLS.PeerCertificates) > 0 {

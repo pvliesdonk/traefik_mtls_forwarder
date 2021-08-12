@@ -1,0 +1,11 @@
+# The name of your plugin as displayed in the Traefik Pilot web UI.
+displayName: mTLS Forwarder
+
+# For now, `middleware` is the only type available.
+type: middleware
+
+# The import path of your plugin.
+import: github.com/pvliesdonk/traefik-mtls-forwarder
+
+# A brief description of what your plugin is doing.
+summary: Make X509 client certificate available in SSL_CLIENT_CERT and CERT_CHAIN_# headers, for compatibility with HA_PROXY

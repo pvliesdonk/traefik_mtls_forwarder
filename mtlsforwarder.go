@@ -1,4 +1,4 @@
-package mtlsforwarder
+package traefik_mtls_forwarder
 
 import (
 	"context"

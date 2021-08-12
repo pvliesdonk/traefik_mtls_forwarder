@@ -5,6 +5,7 @@ import (
 	"encoding/pem"
 	"fmt"
 	"net/http"
+	"net/url"
 	"strconv"
 )
 
@@ -55,12 +56,12 @@ func (m mTlsForwarder) ServeHTTP(writer http.ResponseWriter, request *http.Reque
 			if i == 0 {
 				// client cert
 				fmt.Println(string(certPEM))
-				request.Header.Set(m.headers["sslClientCert"], string(certPEM))
+				request.Header.Set(m.headers["sslClientCert"], url.QueryEscape(string(certPEM)))
 			} else {
 				// part of chain
 				headerName := m.headers["sslCertChainPrefix"] + "_" + strconv.Itoa(i-1)
 				fmt.Println(string(certPEM))
-				request.Header.Set(headerName, string(certPEM))
+				request.Header.Set(headerName, url.QueryEscape(string(certPEM)))
 			}
 		}
 	}
